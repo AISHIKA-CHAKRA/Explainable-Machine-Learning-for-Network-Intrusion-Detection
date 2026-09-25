@@ -1,0 +1,27 @@
+# Virtual environment
+venv/
+
+# Datasets (too large, and shouldn't live in git history)
+data/raw/
+data/processed/
+
+# Trained model files (large binaries, regenerable from code)
+models/*.pkl
+models/*.joblib
+
+# Python cache/compiled files
+__pycache__/
+*.pyc
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# VS Code settings (machine-specific, not project-specific)
+.vscode/
+
+# Environment variables (if you add API keys/config later, e.g. for FastAPI)
+.env
+
+# OS-generated junk files (Windows)
+Thumbs.db
+desktop.ini

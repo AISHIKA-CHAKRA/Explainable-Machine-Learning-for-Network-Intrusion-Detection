@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Network IDS Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🛡️ Network Intrusion Detection Dashboard</h1>
+  </header>
+
+  <main>
+    <section class="input-panel">
+      <h2>Analyze a Traffic Flow</h2>
+      <label for="rowIndex">Test row index (0–122000):</label>
+      <input type="number" id="rowIndex" value="0" min="0">
+      <button id="analyzeBtn">Analyze</button>
+      <p class="hint">Uses a sample row from your saved test dataset.</p>
+    </section>
+
+    <section class="result-panel" id="resultPanel" style="display:none;">
+      <div class="card" id="verdictCard">
+        <span class="label">Verdict</span>
+        <span class="value" id="verdictValue">—</span>
+      </div>
+
+      <div class="card">
+        <span class="label">Confidence</span>
+        <span class="value" id="confidenceValue">—</span>
+        <div class="gauge">
+          <div class="gauge-fill" id="gaugeFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="error-panel" id="errorPanel" style="display:none;"></section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
