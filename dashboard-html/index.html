@@ -7,31 +7,64 @@
 </head>
 <body>
   <header>
-    <h1>🛡️ Network Intrusion Detection Dashboard</h1>
+    <h1> Network Intrusion Detection Dashboard</h1>
+    <p class="subtitle"> Live-simulated traffic sampled exclusively from the held-out test set</p>
   </header>
 
   <main>
-    <section class="input-panel">
-      <h2>Analyze a Traffic Flow</h2>
-      <label for="rowIndex">Test row index (0–122000):</label>
-      <input type="number" id="rowIndex" value="0" min="0">
-      <button id="analyzeBtn">Analyze</button>
-      <p class="hint">Uses a sample row from your saved test dataset.</p>
+    <section class="controls">
+      <button id="analyzeOneBtn">Analyze One Flow</button>
+      <button id="startBtn">▶ Start Monitoring</button>
+      <button id="stopBtn" disabled>■ Stop</button>
+      <button id="resetBtn">↺ Reset Stats</button>
     </section>
 
-    <section class="result-panel" id="resultPanel" style="display:none;">
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Flows Analyzed</span>
+        <span class="stat-value" id="totalCount">0</span>
+      </div>
+      <div class="stat-card attack">
+        <span class="stat-label">Attacks Detected</span>
+        <span class="stat-value" id="attackCount">0</span>
+      </div>
+      <div class="stat-card benign">
+        <span class="stat-label">Benign Flows</span>
+        <span class="stat-value" id="benignCount">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Detection Rate</span>
+        <span class="stat-value" id="detectionRate">0%</span>
+      </div>
+    </section>
+
+    <section class="current-panel" id="currentPanel" style="display:none;">
       <div class="card" id="verdictCard">
-        <span class="label">Verdict</span>
+        <span class="label">Latest Verdict</span>
         <span class="value" id="verdictValue">—</span>
+        <span class="row-tag" id="rowTag"></span>
       </div>
 
       <div class="card">
         <span class="label">Confidence</span>
         <span class="value" id="confidenceValue">—</span>
-        <div class="gauge">
-          <div class="gauge-fill" id="gaugeFill"></div>
-        </div>
+        <div class="gauge"><div class="gauge-fill" id="gaugeFill"></div></div>
       </div>
+
+      <div class="card explanation-card">
+        <span class="label">Why? (Top Contributing Features)</span>
+        <ul id="explanationList"></ul>
+      </div>
+    </section>
+
+    <section class="feed-panel">
+      <h2>Live Traffic Feed</h2>
+      <table id="feedTable">
+        <thead>
+          <tr><th>#</th><th>Row</th><th>Verdict</th><th>Confidence</th></tr>
+        </thead>
+        <tbody id="feedBody"></tbody>
+      </table>
     </section>
 
     <section class="error-panel" id="errorPanel" style="display:none;"></section>

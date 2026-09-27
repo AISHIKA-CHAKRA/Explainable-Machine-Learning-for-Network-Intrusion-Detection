@@ -84,10 +84,18 @@ def predict(flow: NetworkFlow):
         ]
 
     return result
-X_TEST_FOR_DEMO = pd.read_csv("../data/processed/cicids2017_features_reduced.csv")
+X_TEST_FOR_DEMO = pd.read_csv("../data/processed/dashboard_test_data.csv")
+
+import random
+
+@app.get("/sample/random")
+def get_random_sample():
+    idx = random.randint(0, len(X_TEST_FOR_DEMO) - 1)
+    return {"row_index": idx, "features": X_TEST_FOR_DEMO.iloc[idx].to_dict()}
 
 @app.get("/sample/{row_index}")
 def get_sample(row_index: int):
     if row_index < 0 or row_index >= len(X_TEST_FOR_DEMO):
         return {"error": "Row index out of range"}
     return X_TEST_FOR_DEMO.iloc[row_index].to_dict()
+
